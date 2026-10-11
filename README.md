@@ -139,4 +139,4 @@ curl -i http://localhost:8080/avistamientos/9999
 Se usó Claude (Claude Sonnet 5.5, Anthropic) como apoyo para generar el código base y explicar su funcionamiento. El código fue revisado, ejecutado y probado por el autor con los comandos de arriba.
 
 ## Autor
-Pablo — Ingeniería de Software 2, Universidad El Bosque.
+Juan Pablo Moreno Castro — Ingeniería de Software 2, Universidad El Bosque.
