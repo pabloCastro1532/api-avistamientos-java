@@ -3,21 +3,58 @@
 API REST para registrar avistamientos de aves. Hecha con Java 21, Spring Boot y base de datos H2 (archivo).
 
 ## Requisitos
-- Java 21
+- **Java 21 o superior.** Verifica con:
+```
+java -version
+```
+- **Git**, para clonar el repositorio. Verifica con:
+```
+git --version
+```
 - No necesitas instalar Maven: el proyecto trae el wrapper `mvnw`.
 
-## Cómo correrla
-1. Clona el repositorio y entra a la carpeta del proyecto:
-```
-https://github.com/pabloCastro1532/api-avistamientos-java
-```
-2. Ejecuta:
-```
-mvnw.cmd spring-boot:run
-```
-(en Linux/Mac: `./mvnw spring-boot:run`). Queda en http://localhost:8080
+- El puerto **8080** debe estar libre.
 
-Los datos se guardan en la carpeta `data/` y sobreviven al reiniciar.
+## Cómo correrla (paso a paso)
+
+### 1. Clonar el repositorio
+Abre una terminal (CMD en Windows) y ejecuta:
+```
+git clone https://github.com/pabloCastro1532/api-avistamientos-java.git
+```
+
+### 2. Entrar a la carpeta del proyecto
+```
+cd api-avistamientos-java
+```
+Los comandos siguientes deben ejecutarse **dentro de esta carpeta** (la que contiene `pom.xml` y `mvnw.cmd`).
+
+### 3. Iniciar la API
+En Windows: mvnw.cmd spring-boot:run
+
+En Linux o Mac: ./mvnw spring-boot:run
+
+La primera vez descarga las dependencias (puede tardar unos minutos y necesita internet).
+
+### 4. Verificar que arrancó
+
+Cuando aparezca una línea como esta, la API está lista en http://localhost:8080:
+```
+Started AvesApplication in 3.4 seconds
+```
+La terminal queda ocupada mientras la API corre.
+
+### 5. Probarla
+Abre **otra** terminal y ejecuta:
+```
+curl -i http://localhost:8080/avistamientos
+```
+Debe responder `HTTP/1.1 200` y una lista vacía `[]`. Más ejemplos en la sección "Ejemplos con curl".
+
+### 6. Detenerla
+En la terminal donde corre la API, presiona **Ctrl + C**.
+
+Los datos se guardan en la carpeta `data/` (se crea sola) y sobreviven al reiniciar.
 
 ## Modelo
 | Campo | Tipo | Regla |
@@ -102,4 +139,4 @@ curl -i http://localhost:8080/avistamientos/9999
 Se usó Claude (Claude Sonnet 5.5, Anthropic) como apoyo para generar el código base y explicar su funcionamiento. El código fue revisado, ejecutado y probado por el autor con los comandos de arriba.
 
 ## Autor
-Juan Pablo Moreno Castro — Ingeniería de Software 2, Universidad El Bosque.
+Pablo — Ingeniería de Software 2, Universidad El Bosque.
