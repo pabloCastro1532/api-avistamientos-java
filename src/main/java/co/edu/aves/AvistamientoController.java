@@ -1,6 +1,5 @@
 package co.edu.aves;
 
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +21,11 @@ import java.util.stream.Collectors;
 public class AvistamientoController {
 
     private final AvistamientoRepository repo;
+    private final ValidadorDeAvistamiento validador;
 
-    public AvistamientoController(AvistamientoRepository repo) {
+    public AvistamientoController(AvistamientoRepository repo, ValidadorDeAvistamiento validador) {
         this.repo = repo;
+        this.validador = validador;
     }
 
     // GET /avistamientos -> 200 con la lista
@@ -50,7 +51,8 @@ public class AvistamientoController {
 
     // POST /avistamientos -> 201 o 400
     @PostMapping
-    public ResponseEntity<Avistamiento> crear(@Valid @RequestBody Avistamiento nuevo) {
+    public ResponseEntity<Avistamiento> crear(@RequestBody Avistamiento nuevo) {
+        validador.validar(nuevo);
         nuevo.setId(null);
         Avistamiento guardado = repo.save(nuevo);
         return ResponseEntity
@@ -58,10 +60,11 @@ public class AvistamientoController {
                 .body(guardado);
     }
 
-    // PUT /avistamientos/{id} -> 200, 404 o 400
+    // PUT /avistamientos/{id} -> 200, 404 o 400 (se valida primero: 400 antes que 404)
     @PutMapping("/{id}")
     public ResponseEntity<Avistamiento> actualizar(@PathVariable Long id,
-                                                   @Valid @RequestBody Avistamiento datos) {
+                                                   @RequestBody Avistamiento datos) {
+        validador.validar(datos);
         if (!repo.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

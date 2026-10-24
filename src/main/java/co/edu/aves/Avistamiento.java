@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class Avistamiento {
@@ -14,17 +12,9 @@ public class Avistamiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String especie;
-
-    @NotBlank
     private String lugar;
-
-    @NotBlank
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "La fecha debe tener formato AAAA-MM-DD")
     private String fecha;
-
-    @NotBlank
     private String observador;
 
     public Long getId() { return id; }
