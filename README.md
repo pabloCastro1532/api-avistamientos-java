@@ -3,21 +3,58 @@
 API REST para registrar avistamientos de aves. Hecha con Java 21, Spring Boot y base de datos H2 (archivo).
 
 ## Requisitos
-- Java 21
+- **Java 21 o superior.** Verifica con:
+```
+java -version
+```
+- **Git**, para clonar el repositorio. Verifica con:
+```
+git --version
+```
 - No necesitas instalar Maven: el proyecto trae el wrapper `mvnw`.
 
-## Cómo correrla
-1. Clona el repositorio y entra a la carpeta del proyecto:
-```
-https://github.com/pabloCastro1532/api-avistamientos-java
-```
-2. Ejecuta:
-```
-mvnw.cmd spring-boot:run
-```
-(en Linux/Mac: `./mvnw spring-boot:run`). Queda en http://localhost:8080
+- El puerto **8080** debe estar libre.
 
-Los datos se guardan en la carpeta `data/` y sobreviven al reiniciar.
+## Cómo correrla (paso a paso)
+
+### 1. Clonar el repositorio
+Abre una terminal (CMD en Windows) y ejecuta:
+```
+git clone https://github.com/pabloCastro1532/api-avistamientos-java.git
+```
+
+### 2. Entrar a la carpeta del proyecto
+```
+cd api-avistamientos-java
+```
+Los comandos siguientes deben ejecutarse **dentro de esta carpeta** (la que contiene `pom.xml` y `mvnw.cmd`).
+
+### 3. Iniciar la API
+En Windows: mvnw.cmd spring-boot:run
+
+En Linux o Mac: ./mvnw spring-boot:run
+
+La primera vez descarga las dependencias (puede tardar unos minutos y necesita internet).
+
+### 4. Verificar que arrancó
+
+Cuando aparezca una línea como esta, la API está lista en http://localhost:8080:
+```
+Started AvesApplication in 3.4 seconds
+```
+La terminal queda ocupada mientras la API corre.
+
+### 5. Probarla
+Abre **otra** terminal y ejecuta:
+```
+curl -i http://localhost:8080/avistamientos
+```
+Debe responder `HTTP/1.1 200` y una lista vacía `[]`. Más ejemplos en la sección "Ejemplos con curl".
+
+### 6. Detenerla
+En la terminal donde corre la API, presiona **Ctrl + C**.
+
+Los datos se guardan en la carpeta `data/` (se crea sola) y sobreviven al reiniciar.
 
 ## Modelo
 | Campo | Tipo | Regla |
@@ -26,13 +63,13 @@ Los datos se guardan en la carpeta `data/` y sobreviven al reiniciar.
 
 | id | número | lo asigna el sistema |
 
-| especie | texto | obligatorio |
+| especie | texto | obligatorio, entre 3 y 50 caracteres |
 
 | lugar | texto | obligatorio |
 
-| fecha | texto | obligatorio, formato AAAA-MM-DD |
+| fecha | texto | obligatorio, formato AAAA-MM-DD, fecha real y no posterior a hoy |
 
-| observador | texto | obligatorio |
+| observador | texto | obligatorio (no vacío) |
 
 ## Endpoints
 | Método | Ruta | Éxito | Errores |
@@ -98,8 +135,37 @@ Error 404 (id que no existe):
 curl -i http://localhost:8080/avistamientos/9999
 ```
 
+## Validación y errores 400
+Si un avistamiento no es válido, POST y PUT responden **400** con un JSON que dice qué campo falló:
+```
+{"campo":"especie","mensaje":"La especie debe tener entre 3 y 50 caracteres"}
+```
+La validación vive en la clase `ValidadorDeAvistamiento`, separada del controlador. La fecha de "hoy" la da la interfaz `Reloj`, para poder probarla con un reloj fijo.
+
+## Pruebas
+Correr todas las pruebas (unitarias y de integración):
+
+En Windows: `mvnw.cmd test`
+
+En Linux o Mac: `./mvnw test`
+
+- Unitarias del validador: `src/test/java/co/edu/aves/ValidadorDeAvistamientoTest.java` (usan `RelojFijo`, un stub del reloj).
+- Integración de la API por HTTP con MockMvc: `src/test/java/co/edu/aves/AvistamientoApiIntegrationTest.java` (base H2 en memoria, tabla vacía antes de cada prueba).
+
+## Cobertura
+Generar el reporte de cobertura (JaCoCo):
+
+En Windows: `mvnw.cmd verify`
+
+En Linux o Mac: `./mvnw verify`
+
+El reporte queda en `target/site/jacoco/index.html`.
+
+## Justificación de las pruebas
+Ver [docs/justificacion-pruebas.md](docs/justificacion-pruebas.md).
+
 ## Uso de IA
-Se usó Claude (Claude Sonnet 5.5, Anthropic) como apoyo para generar el código base y explicar su funcionamiento. El código fue revisado, ejecutado y probado por el autor con los comandos de arriba.
+Se usó Claude (Claude Sonnet 5.5, Anthropic) como apoyo para generar el código base y explicar su funcionamiento. El código fue revisado, ejecutado y probado por el autor con los comandos de arriba. Para el taller de pruebas (ISW-2) también se usó Claude (Claude Sonnet 5.5, Anthropic) como apoyo para el refactor del validador, el reloj y la redacción de las pruebas; el autor ejecutó todas las pruebas y el reporte de cobertura, y revisó las decisiones del documento de justificación.
 
 ## Autor
 Juan Pablo Moreno Castro — Ingeniería de Software 2, Universidad El Bosque.
