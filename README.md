@@ -169,3 +169,19 @@ Se usó Claude (Claude Sonnet 5.5, Anthropic) como apoyo para generar el código
 
 ## Autor
 Juan Pablo Moreno Castro — Ingeniería de Software 2, Universidad El Bosque.
+
+## Arquitectura
+
+La API usa **arquitectura hexagonal** (puertos y adaptadores). El núcleo (`aplicacion`) no depende de Spring ni de JPA; los adaptadores web y de persistencia dependen del núcleo.
+
+- Documento del taller (investigación, estructura, diagrama y evidencias): [docs/taller5-arquitectura-hexagonal.md](docs/taller5-arquitectura-hexagonal.md)
+- Rama del refactor: `refactor-arquitectura`
+
+### Pruebas y cobertura
+
+```
+mvnw.cmd test
+mvnw.cmd clean verify
+```
+
+El reporte de cobertura queda en `target\site\jacoco\index.html`.
