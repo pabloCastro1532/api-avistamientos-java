@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AvistamientoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report"></a> &gt; <a href="index.source.html" class="el_package">co.edu.aves</a> &gt; <span class="el_source">AvistamientoController.java</span></div><h1>AvistamientoController.java</h1><pre class="source lang-java linenums">package co.edu.aves;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping(&quot;/avistamientos&quot;)
+public class AvistamientoController {
+
+    private final AvistamientoRepository repo;
+    private final ValidadorDeAvistamiento validador;
+
+<span class="fc" id="L26">    public AvistamientoController(AvistamientoRepository repo, ValidadorDeAvistamiento validador) {</span>
+<span class="fc" id="L27">        this.repo = repo;</span>
+<span class="fc" id="L28">        this.validador = validador;</span>
+<span class="fc" id="L29">    }</span>
+
+    // GET /avistamientos -&gt; 200 con la lista
+    @GetMapping
+    public List&lt;Avistamiento&gt; listar() {
+<span class="fc" id="L34">        return repo.findAll();</span>
+    }
+
+    // GET /avistamientos/resumen -&gt; 200 con el conteo por especie (bonus)
+    @GetMapping(&quot;/resumen&quot;)
+    public Map&lt;String, Long&gt; resumen() {
+<span class="fc" id="L40">        return repo.findAll().stream().collect(</span>
+<span class="fc" id="L41">                Collectors.groupingBy(Avistamiento::getEspecie, TreeMap::new, Collectors.counting()));</span>
+    }
+
+    // GET /avistamientos/{id} -&gt; 200 o 404
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Avistamiento&gt; ver(@PathVariable Long id) {
+<span class="fc" id="L47">        return repo.findById(id)</span>
+<span class="fc" id="L48">                .map(ResponseEntity::ok)</span>
+<span class="fc" id="L49">                .orElse(ResponseEntity.notFound().build());</span>
+    }
+
+    // POST /avistamientos -&gt; 201 o 400
+    @PostMapping
+    public ResponseEntity&lt;Avistamiento&gt; crear(@RequestBody Avistamiento nuevo) {
+<span class="fc" id="L55">        validador.validar(nuevo);</span>
+<span class="fc" id="L56">        nuevo.setId(null);</span>
+<span class="fc" id="L57">        Avistamiento guardado = repo.save(nuevo);</span>
+<span class="fc" id="L58">        return ResponseEntity</span>
+<span class="fc" id="L59">                .created(URI.create(&quot;/avistamientos/&quot; + guardado.getId()))</span>
+<span class="fc" id="L60">                .body(guardado);</span>
+    }
+
+    // PUT /avistamientos/{id} -&gt; 200, 404 o 400 (se valida primero: 400 antes que 404)
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Avistamiento&gt; actualizar(@PathVariable Long id,
+                                                   @RequestBody Avistamiento datos) {
+<span class="fc" id="L67">        validador.validar(datos);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (!repo.existsById(id)) {</span>
+<span class="fc" id="L69">            return ResponseEntity.notFound().build();</span>
+        }
+<span class="fc" id="L71">        datos.setId(id);</span>
+<span class="fc" id="L72">        return ResponseEntity.ok(repo.save(datos));</span>
+    }
+
+    // DELETE /avistamientos/{id} -&gt; 204 o 404
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; eliminar(@PathVariable Long id) {
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (!repo.existsById(id)) {</span>
+<span class="fc" id="L79">            return ResponseEntity.notFound().build();</span>
+        }
+<span class="fc" id="L81">        repo.deleteById(id);</span>
+<span class="fc" id="L82">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

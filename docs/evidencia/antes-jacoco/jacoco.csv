@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+,co.edu.aves,RelojSistema,0,5,0,0,0,2,0,2,0,2
+,co.edu.aves,Avistamiento,0,38,0,0,0,11,0,11,0,11
+,co.edu.aves,ValidadorDeAvistamiento,0,102,0,12,0,27,0,12,0,6
+,co.edu.aves,AvistamientoInvalidoException,0,10,0,0,0,4,0,2,0,2
+,co.edu.aves,ManejadorDeErrores,0,14,0,0,0,3,0,2,0,2
+,co.edu.aves,AvesApplication,5,3,0,0,2,1,1,1,1,1
+,co.edu.aves,AvistamientoController,0,93,0,4,0,25,0,9,0,7

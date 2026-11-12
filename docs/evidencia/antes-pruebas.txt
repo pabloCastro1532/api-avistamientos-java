@@ -1,0 +1,148 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< co.edu:aves >-----------------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (default) @ aves ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Jonathan Isaza\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.15\\org.jacoco.agent-0.8.15-runtime.jar=destfile=C:\\Users\\Jonathan Isaza\\api-avistamientos-java\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ aves ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ aves ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 9 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ aves ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ aves ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ aves ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running co.edu.aves.AvesApplicationTests
+20:05:17.937 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [co.edu.aves.AvesApplicationTests]: AvesApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:05:18.191 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration co.edu.aves.AvesApplication for test class co.edu.aves.AvesApplicationTests
+20:05:18.418 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [co.edu.aves.AvesApplicationTests]: AvesApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:05:18.420 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration co.edu.aves.AvesApplication for test class co.edu.aves.AvesApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-11-11T20:05:19.017-05:00  INFO 7620 --- [           main] co.edu.aves.AvesApplicationTests         : Starting AvesApplicationTests using Java 27 with PID 7620 (started by Jonathan Isaza in C:\Users\Jonathan Isaza\api-avistamientos-java)
+2026-11-11T20:05:19.018-05:00  INFO 7620 --- [           main] co.edu.aves.AvesApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-11-11T20:05:19.984-05:00  INFO 7620 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-11T20:05:20.066-05:00  INFO 7620 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 1 JPA repository interface.
+2026-11-11T20:05:20.716-05:00  INFO 7620 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-11T20:05:20.829-05:00  INFO 7620 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-11-11T20:05:21.694-05:00  INFO 7620 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-11T20:05:21.757-05:00  INFO 7620 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-11T20:05:22.241-05:00  INFO 7620 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-11-11T20:05:22.243-05:00  INFO 7620 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-11T20:05:22.369-05:00  INFO 7620 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-11T20:05:23.920-05:00  INFO 7620 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-11T20:05:23.984-05:00  INFO 7620 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-11T20:05:24.125-05:00  INFO 7620 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-11T20:05:24.341-05:00  WARN 7620 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-11T20:05:24.889-05:00  INFO 7620 --- [           main] co.edu.aves.AvesApplicationTests         : Started AvesApplicationTests in 6.348 seconds (process running for 8.724)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\Jonathan Isaza\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.841 s -- in co.edu.aves.AvesApplicationTests
+[INFO] Running co.edu.aves.AvistamientoApiIntegrationTest
+2026-11-11T20:05:25.386-05:00  INFO 7620 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [co.edu.aves.AvistamientoApiIntegrationTest]: AvistamientoApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-11T20:05:25.417-05:00  INFO 7620 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration co.edu.aves.AvesApplication for test class co.edu.aves.AvistamientoApiIntegrationTest
+2026-11-11T20:05:25.419-05:00  INFO 7620 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [co.edu.aves.AvistamientoApiIntegrationTest]: AvistamientoApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-11T20:05:25.422-05:00  INFO 7620 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration co.edu.aves.AvesApplication for test class co.edu.aves.AvistamientoApiIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-11-11T20:05:25.461-05:00  INFO 7620 --- [           main] c.e.aves.AvistamientoApiIntegrationTest  : Starting AvistamientoApiIntegrationTest using Java 27 with PID 7620 (started by Jonathan Isaza in C:\Users\Jonathan Isaza\api-avistamientos-java)
+2026-11-11T20:05:25.462-05:00  INFO 7620 --- [           main] c.e.aves.AvistamientoApiIntegrationTest  : No active profile set, falling back to 1 default profile: "default"
+2026-11-11T20:05:25.626-05:00  INFO 7620 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-11T20:05:25.634-05:00  INFO 7620 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interface.
+2026-11-11T20:05:25.719-05:00  INFO 7620 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-11T20:05:25.744-05:00  INFO 7620 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-11T20:05:25.745-05:00  INFO 7620 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-11-11T20:05:25.746-05:00  INFO 7620 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2026-11-11T20:05:25.747-05:00  INFO 7620 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-11-11T20:05:25.747-05:00  INFO 7620 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-11T20:05:25.778-05:00  INFO 7620 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-11T20:05:25.783-05:00  INFO 7620 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-11T20:05:25.833-05:00  WARN 7620 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-11T20:05:25.967-05:00  INFO 7620 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-11T20:05:25.968-05:00  INFO 7620 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-11T20:05:25.969-05:00  INFO 7620 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-11T20:05:25.984-05:00  INFO 7620 --- [           main] c.e.aves.AvistamientoApiIntegrationTest  : Started AvistamientoApiIntegrationTest in 0.551 seconds (process running for 9.819)
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.825 s -- in co.edu.aves.AvistamientoApiIntegrationTest
+[INFO] Running co.edu.aves.ValidadorDeAvistamientoTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in co.edu.aves.ValidadorDeAvistamientoTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 30, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ aves ---
+[INFO] Building jar: C:\Users\Jonathan Isaza\api-avistamientos-java\target\aves-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ aves ---
+[INFO] Replacing main artifact C:\Users\Jonathan Isaza\api-avistamientos-java\target\aves-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\Jonathan Isaza\api-avistamientos-java\target\aves-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- jacoco:0.8.15:report (report) @ aves ---
+[INFO] Loading execution data file C:\Users\Jonathan Isaza\api-avistamientos-java\target\jacoco.exec
+[INFO] Analyzed bundle '' with 7 classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.638 s
+[INFO] Finished at: 2026-11-11T20:05:28-05:00
+[INFO] ------------------------------------------------------------------------
