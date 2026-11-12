@@ -1,12 +1,18 @@
-package co.edu.aves;
+package co.edu.aves.adaptador.salida.persistencia;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+/**
+ * Modelo de persistencia: cómo se guarda un avistamiento en la base. Es un detalle del adaptador;
+ * el dominio no lo conoce. Conserva el nombre de tabla "avistamiento" para no romper los datos existentes.
+ */
 @Entity
-public class Avistamiento {
+@Table(name = "avistamiento")
+public class AvistamientoJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

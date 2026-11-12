@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import co.edu.aves.aplicacion.dominio.Avistamiento;
+import co.edu.aves.aplicacion.dominio.AvistamientoInvalidoException;
+import co.edu.aves.aplicacion.dominio.ValidadorDeAvistamiento;
 import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -9,6 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import co.edu.aves.aplicacion.dominio.Avistamiento;
+import co.edu.aves.aplicacion.puerto.salida.RepositorioDeAvistamientos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 /**
- * Pruebas de integración: levantan la aplicación completa (controlador, validador, JPA, H2 en memoria)
+ * Pruebas de integración: levantan la aplicación completa (adaptador web, núcleo, adaptador JPA, H2 en memoria)
  * y la llaman por HTTP con MockMvc. No hay dobles: se prueba que las piezas funcionan juntas.
  */
 @SpringBootTest
@@ -32,12 +34,12 @@ class AvistamientoApiIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private AvistamientoRepository repo;
+    private RepositorioDeAvistamientos repo;
 
     // Independencia: cada prueba empieza con la tabla vacía y prepara sus propios datos.
     @BeforeEach
     void limpiarBaseDeDatos() {
-        repo.deleteAll();
+        repo.listarTodos().forEach(a -> repo.eliminarPorId(a.getId()));
     }
 
     private Avistamiento guardar(String especie, String lugar, String fecha, String observador) {
@@ -46,7 +48,7 @@ class AvistamientoApiIntegrationTest {
         a.setLugar(lugar);
         a.setFecha(fecha);
         a.setObservador(observador);
-        return repo.save(a);
+        return repo.guardar(a);
     }
 
     private static String json(String especie, String lugar, String fecha, String observador) {
@@ -129,7 +131,7 @@ class AvistamientoApiIntegrationTest {
         mockMvc.perform(get(ubicacion))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.especie").value("colibri"));
-        assertEquals(1, repo.count());
+        assertEquals(1, repo.listarTodos().size());
     }
 
     @Test
@@ -144,7 +146,7 @@ class AvistamientoApiIntegrationTest {
         respuesta.andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.campo").value("especie"))
                 .andExpect(jsonPath("$.mensaje").value("La especie debe tener entre 3 y 50 caracteres"));
-        assertEquals(0, repo.count());
+        assertEquals(0, repo.listarTodos().size());
     }
 
     @Test
@@ -159,7 +161,7 @@ class AvistamientoApiIntegrationTest {
         respuesta.andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.campo").value("fecha"))
                 .andExpect(jsonPath("$.mensaje").value("La fecha no puede ser posterior a hoy"));
-        assertEquals(0, repo.count());
+        assertEquals(0, repo.listarTodos().size());
     }
 
     @Test
@@ -173,7 +175,7 @@ class AvistamientoApiIntegrationTest {
         // Assert
         respuesta.andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.campo").value("fecha"));
-        assertEquals(0, repo.count());
+        assertEquals(0, repo.listarTodos().size());
     }
 
     // ---------- PUT /avistamientos/{id} ----------
@@ -195,7 +197,7 @@ class AvistamientoApiIntegrationTest {
         // Assert: efecto
         mockMvc.perform(get("/avistamientos/{id}", guardado.getId()))
                 .andExpect(jsonPath("$.lugar").value("Bosque"));
-        assertEquals(1, repo.count());
+        assertEquals(1, repo.listarTodos().size());
     }
 
     @Test
@@ -210,7 +212,7 @@ class AvistamientoApiIntegrationTest {
         // Assert
         respuesta.andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.campo").value("especie"));
-        Avistamiento sinCambios = repo.findById(guardado.getId()).orElseThrow();
+        Avistamiento sinCambios = repo.buscarPorId(guardado.getId()).orElseThrow();
         assertEquals("colibri", sinCambios.getEspecie());
         assertEquals("Chicaque", sinCambios.getLugar());
     }
@@ -225,7 +227,7 @@ class AvistamientoApiIntegrationTest {
                 .content(cambios));
         // Assert
         respuesta.andExpect(status().isNotFound());
-        assertEquals(0, repo.count());
+        assertEquals(0, repo.listarTodos().size());
     }
 
     // ---------- DELETE /avistamientos/{id} ----------
@@ -240,7 +242,7 @@ class AvistamientoApiIntegrationTest {
         respuesta.andExpect(status().isNoContent());
         mockMvc.perform(get("/avistamientos/{id}", guardado.getId()))
                 .andExpect(status().isNotFound());
-        assertEquals(0, repo.count());
+        assertEquals(0, repo.listarTodos().size());
     }
 
     @Test
@@ -251,7 +253,7 @@ class AvistamientoApiIntegrationTest {
         ResultActions respuesta = mockMvc.perform(delete("/avistamientos/{id}", ID_QUE_NO_EXISTE));
         // Assert: 404 y el registro existente sigue ahí
         respuesta.andExpect(status().isNotFound());
-        assertEquals(1, repo.count());
+        assertEquals(1, repo.listarTodos().size());
     }
 
     // ---------- GET /avistamientos/resumen (extra) ----------

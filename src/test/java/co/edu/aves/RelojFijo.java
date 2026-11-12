@@ -1,5 +1,6 @@
 package co.edu.aves;
 
+import co.edu.aves.aplicacion.puerto.salida.Reloj;
 import java.time.LocalDate;
 
 /** Stub de Reloj: siempre responde la misma fecha, para que las pruebas no dependan del día en que se corren. */
